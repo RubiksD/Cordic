@@ -1,5 +1,5 @@
 CC = gcc
-COMPILATION_FLAGS = -Wall 
+COMPILATION_FLAGS = -Wall -O3 
 OUTPUT1 = cordic_rotate
 
 SRC = ../src/main.c\
