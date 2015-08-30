@@ -29,7 +29,6 @@ void calculate_rotation_angle(double f_sample, double f_in,int *word_mag, int *w
 				*word_mag |= BIT((31-i));
 				cur_angle -= temp_angle;
 			}
-			printf("%lf\t\t%lf\t\t%lf\t%lf\n",angle,cur_angle,temp_tan,scale);
 			scale = scale /(sqrt((1 + (temp_tan*temp_tan))));
 			temp_tan = temp_tan /2;
 			temp_angle = atan(temp_tan);
@@ -55,10 +54,10 @@ int main()
 	double scale;
 
 	calculate_rotation_angle(F_SAMPLE,F_OUT,&word_mag,&word_sign,&scale);
-	printf("%x\t%x\t%lf\n",word_mag,word_sign,scale);
+	printf("Rotation Magnitude = 0x%x\nRotation sign = 0x%x\nScale factor = %lf\n",word_mag,word_sign,scale);
 	
 	X_in = 0x8000;
-	printf("%d\n",X_in);
+	printf("Amplitude = %d\n",X_in);
 	Y_in = 0;
 	
 	for(j=0;j<999;j++){
@@ -75,9 +74,7 @@ int main()
 		}
 		X_in *= scale;
 		Y_in *= scale;
-		fft_in[j&63]= 0x8000*(sin((2*pi/8)*(j%64)));//X_in;
-		//fft_in[j&63]= X_in;
-		printf("%d %20lf\n",fft_in[j&63],sin((2*pi/8)*(j%64)));
+		fft_in[j&63]= X_in;
 		if((j%63 == 0) && (j>0)){
 			printf("\n");
 			fft_64pt(fft_in,fft_outX,fft_outY);
