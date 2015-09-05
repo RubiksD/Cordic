@@ -55,3 +55,30 @@ void cordic_rotate(int word_mag, int word_sign,double scale,int *X_in,int *Y_in)
 	*X_in *= scale;
 	*Y_in *= scale;
 }
+
+int cordic_vector(int X_in,int Y_in)
+{
+	int i=0;
+	int X_out,Y_out;
+
+	if(X_in<0){
+		X_in = -X_in;
+	}
+	for(i=0;i<16;i++){
+		if(Y_in == 0){
+			break;
+		}else if(Y_in > 0){
+			X_out = X_in + (Y_in >> i);
+			Y_out = -(X_in >> i) + Y_in;
+		}else{
+			X_out = X_in - (Y_in >> i);
+			Y_out = (X_in >> i) + Y_in ;
+		}
+		X_in = X_out;
+		Y_in = Y_out;
+	}
+	X_in *= 0.6027252935;
+	Y_in *= 0.6027252935;
+
+	return X_in;
+}

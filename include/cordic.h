@@ -5,3 +5,4 @@
 
 void calculate_rotation_angle(double f_sample, double f_in,int *word_mag, int *word_sign,double *scale_out);
 void cordic_rotate(int word_mag, int word_sign,double scale,int *X_in,int *Y_in);
+int cordic_vector(int X_in,int Y_in);
