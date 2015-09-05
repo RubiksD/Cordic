@@ -26,3 +26,8 @@ Commit Number:8
 Commit Number:9
 	-Added Commit_Notes.txt
 	-Updated Readme
+
+Commit Number:10
+	-Removed all multiplications from fft
+	-Started code for descimation in time
+	-Added macros MEASURE_TIME and DISPLAY_OUTPUT
