@@ -1,0 +1,28 @@
+Commit Number:1
+	-first commit
+
+Commit Number:2
+	-folders
+
+Commit Number:3
+	-fft_done
+
+Commit Number:4
+	-fft_commit
+
+Commit Number:5
+	-Makefile commit
+
+Commit Number:6
+	-N-point fft added
+
+Commit Number:7
+	-New files for cordic computation
+
+Commit Number:8
+	-Added vectoring of output
+	-Added time measurement
+
+Commit Number:9
+	-Added Commit_Notes.txt
+	-Updated Readme
