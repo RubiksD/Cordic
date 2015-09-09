@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <math.h>
 #include "../include/cordic.h"
 
@@ -56,6 +57,44 @@ void cordic_rotate(int word_mag, int word_sign,double scale,int *X_in,int *Y_in)
 	*Y_in *= scale;
 }
 
+void cordic_rotate_2(int *X_in,int *Y_in,double angle)
+{
+	int i;
+	int X_out,Y_out;
+	int change_sign =0;
+	double error=angle;
+	double cur_tan = 1;
+	double scale = 1;
+	if( (angle > (pi/2)) && ( angle < pi)){
+		error = error - pi;
+		change_sign = 1;
+	} else if((angle < (-pi/2)) && ( angle > -pi)){
+		error = error + pi;
+		change_sign = 1;
+	}
+	for(i=0;(error) && (i<32);i++){
+		if(error > 0){
+			X_out = *X_in - (*Y_in >> i);
+			Y_out = (*X_in >> i) + *Y_in ;
+			error -= atan(cur_tan);
+		} else {
+			X_out = *X_in + (*Y_in >> i);
+			Y_out = -(*X_in >> i) + *Y_in;
+			error += atan(cur_tan);
+		}
+		scale = scale/(1+(cur_tan*cur_tan));
+		cur_tan = cur_tan/2;
+		*X_in = X_out;
+		*Y_in = Y_out;
+	}
+	scale = sqrt(scale);
+	*X_in *= scale;
+	*Y_in *= scale;
+	if(change_sign){
+		*X_in *= -1;
+		*Y_in *= -1;
+	}
+}
 int cordic_vector(int X_in,int Y_in)
 {
 	int i=0;

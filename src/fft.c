@@ -13,17 +13,17 @@ inline int bit_rev(int num,int N){
 	return rev;
 }
 
-void fft_Npt(int *input, double *X_out, double *Y_out,int N)
+void fft_Npt(int *input, int *X_out, int *Y_out,int N)
 {
 	int i,j,k;
 	int offset=0;
 	int Set_Count=1;
 	double theta = 2*pi/N;
 	double Set_theta,Butterfly_theta;
-	double X_in[1024],Y_in[1024];
-	double X_temp[3],Y_temp[3];
+	int X_in[1024],Y_in[1024];
+	int X_temp[3],Y_temp[3];
 	for(i=0;i<N;i++){
-		X_in[i]=(double)input[i];
+		X_in[i]=input[i];
 		Y_in[i]=0;
 	}
 	
@@ -39,9 +39,12 @@ void fft_Npt(int *input, double *X_out, double *Y_out,int N)
 				X_temp[1] = X_in[k+offset]-X_in[k+i+offset];
 				Y_temp[1] = Y_in[k+offset]-Y_in[k+i+offset];
 
-				X_temp[2] = (X_temp[1]*cos(Butterfly_theta)) + (Y_temp[1]*sin(Butterfly_theta));
-				Y_temp[2] = (-(X_temp[1]*sin(Butterfly_theta))) + (Y_temp[1]*cos(Butterfly_theta));
-				
+				//X_temp[2] = (X_temp[1]*cos(Butterfly_theta)) + (Y_temp[1]*sin(Butterfly_theta));
+				//Y_temp[2] = (-(X_temp[1]*sin(Butterfly_theta))) + (Y_temp[1]*cos(Butterfly_theta));
+				cordic_rotate_2(&X_temp[1],&Y_temp[1],-Butterfly_theta);
+				X_temp[2] = X_temp[1];
+				Y_temp[2] = Y_temp[1];
+
 				X_in[k+offset] = X_temp[0];
 				Y_in[k+offset] = Y_temp[0];
 				X_in[k+i+offset] = X_temp[2];

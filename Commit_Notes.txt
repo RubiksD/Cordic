@@ -31,3 +31,6 @@ Commit Number:10
 	-Removed all multiplications from fft
 	-Started code for descimation in time
 	-Added macros MEASURE_TIME and DISPLAY_OUTPUT
+
+Commit Number:11
+	-Reduced double calculations

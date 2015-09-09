@@ -6,7 +6,7 @@
 #include "../include/fft.h"
 #include "../include/cordic.h"
 
-double fft_outX[N_POINT],fft_outY[N_POINT];
+int fft_outX[N_POINT],fft_outY[N_POINT];
 
 int main()
 {
@@ -43,8 +43,8 @@ int main()
 #endif
 			fft_Npt(fft_in,fft_outX,fft_outY,N_POINT);
 			for(k=0;k<N_POINT;k=k+2){
-				fft_out[k] = cordic_vector((int)fft_outX[k],(int)fft_outY[k]);
-				fft_out[k+1] = cordic_vector((int)fft_outX[k+1],(int)fft_outY[k+1]);
+				fft_out[k] = cordic_vector(fft_outX[k],fft_outY[k]);
+				fft_out[k+1] = cordic_vector(fft_outX[k+1],fft_outY[k+1]);
 			}
 #ifdef MEASURE_TIME
 			gettimeofday(&tv2,NULL);
