@@ -2,6 +2,24 @@
 #include <math.h>
 #include "../include/cordic.h"
 
+double atan_values[32] = {0};
+double scale_factor_values[32] = {1};
+
+void create_lookup_table()
+{
+	double tan_val = 1;
+	double scale = 1;
+	int i=0;
+	printf("atan_values[%d] = %lf\t\tscale_factor_values[%d] = %lf\n",i,atan_values[i],i,scale_factor_values[i]);
+	for(i=1;i<31;i++){
+		atan_values[i] = atan(tan_val);
+		scale *= 1.0/sqrt(1+(tan_val*tan_val));
+		scale_factor_values[i] = scale;
+		printf("atan_values[%d] = %lf\t\tscale_factor_values[%d] = %lf\n",i,atan_values[i],i,scale_factor_values[i]);
+		tan_val = tan_val/2;
+	}
+}
+
 void calculate_rotation_angle(double f_sample, double f_in,int *word_mag, int *word_sign,double *scale_out)
 {
 	double points;

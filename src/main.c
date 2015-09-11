@@ -26,6 +26,7 @@ int main()
 	struct timeval tv1,tv2;
 #endif
 
+	create_lookup_table();
 	calculate_rotation_angle(F_SAMPLE,F_OUT,&word_mag,&word_sign,&scale);
 	printf("Rotation Magnitude = 0x%x\nRotation sign = 0x%x\nScale factor = %lf\n",word_mag,word_sign,scale);
 	

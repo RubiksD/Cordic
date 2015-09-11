@@ -34,3 +34,6 @@ Commit Number:10
 
 Commit Number:11
 	-Reduced double calculations
+
+Commit Number:12
+	-Added generation of double type lookup table for scale factor and atan values
