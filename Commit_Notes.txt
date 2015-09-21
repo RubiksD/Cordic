@@ -37,3 +37,8 @@ Commit Number:11
 
 Commit Number:12
 	-Added generation of double type lookup table for scale factor and atan values
+
+Commit Number:12
+	-Added ifft
+	-Added seperate compilation for generating just a sine wave
+	-Added assembly code generation

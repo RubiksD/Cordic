@@ -1,16 +1,32 @@
 CC = gcc
-COMPILATION_FLAGS = -Wall -O3 
-OUTPUT1 = cordic_rotate
+OD = objdump
 
-SRC = ../src/main.c\
-			../src/fft.c\
-			../src/cordic.c
+SRC_PATH = ../src
+PRE_COMPILATION_FLAGS = -Wall -O3 -g
+POST_COMPILATION_FLAGS = -lm
+OUTPUT1 = cordic_rotate.out
+OUTPUT2 = cordic_sin_wave.out
+INCLUDE = -I ../include
 
-FLAGS = -DMEASURE_TIME
+SRC_COMMON = 	$(SRC_PATH)/fft.c\
+							$(SRC_PATH)/cordic.c
+SRC1	=	$(SRC_PATH)/main.c\
+				$(SRC_COMMON)
+
+SRC2	=	$(SRC_PATH)/sin_wave.c\
+				$(SRC_COMMON)
+
+#FLAGS += -DMEASURE_TIME
 FLAGS += -DDISPLAY_OUTPUT
 
 rotate:	clean
-	$(CC) $(COMPILATION_FLAGS) $(SRC) $(FLAGS) -o $(OUTPUT1) -lm
+	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC1) $(FLAGS) -o $(OUTPUT1) $(POST_COMPILATION_FLAGS)
+	$(OD) -S $(OUTPUT1) > $(OUTPUT1).asm
+
+sin_wave:	clean
+	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC2) $(FLAGS) -o $(OUTPUT2) $(POST_COMPILATION_FLAGS)
+	$(OD) -S $(OUTPUT2) > $(OUTPUT2).asm
 
 clean:
-	rm -f $(OUTPUT1)
+	rm -f *.out
+	rm -f *.asm

@@ -3,11 +3,11 @@
 #ifdef MEASURE_TIME
 #include <sys/time.h>
 #endif
-#include "../include/fft.h"
-#include "../include/cordic.h"
+#include "fft.h"
+#include "cordic.h"
 
 int fft_outX[N_POINT],fft_outY[N_POINT];
-
+int ifft_outX[N_POINT],ifft_outY[N_POINT];
 int main()
 {
 	int X_in,Y_in;
@@ -17,6 +17,7 @@ int main()
 
 	int fft_in[N_POINT];
 	int fft_out[N_POINT];
+	int ifft_out[N_POINT];
 	
 	int word_mag;
 	int word_sign;
@@ -37,15 +38,20 @@ int main()
 	for(j=0;j<9999;j++){
 		cordic_rotate(word_mag,word_sign,scale,&X_in,&Y_in);
 		fft_in[j&(N_POINT-1)]= X_in;
-		if((j%(N_POINT) == 0) && (j>0)){
+		if(((j%N_POINT) == 0) && (j>0)){
 			printf("\n");
 #ifdef MEASURE_TIME
 			gettimeofday(&tv1,NULL);
 #endif
 			fft_Npt(fft_in,fft_outX,fft_outY,N_POINT);
+			ifft_Npt(fft_outX,fft_outY,ifft_outX,ifft_outY,N_POINT);
 			for(k=0;k<N_POINT;k=k+2){
 				fft_out[k] = cordic_vector(fft_outX[k],fft_outY[k]);
 				fft_out[k+1] = cordic_vector(fft_outX[k+1],fft_outY[k+1]);
+				//ifft_out[k] = cordic_vector(ifft_outX[k],ifft_outY[k]);
+				//ifft_out[k+1] = cordic_vector(ifft_outX[k+1],ifft_outY[k+1]);
+				ifft_out[k] = ifft_outX[k];
+				ifft_out[k+1] = ifft_outX[k+1];
 			}
 #ifdef MEASURE_TIME
 			gettimeofday(&tv2,NULL);
@@ -54,7 +60,10 @@ int main()
 #endif
 #ifdef DISPLAY_OUTPUT
 			for(k=0;k<N_POINT;k++){
-				printf("%.2f\t%d\t%10d\n",k*F_res,fft_out[k]/N_POINT,fft_in[k]);
+				printf("%.8f\t%d\t%10d\n",((k*1.0)/F_SAMPLE),ifft_out[k],fft_in[k]);
+			}
+			for(k=0;k<N_POINT;k++){
+				printf("%.2f\t%d\t%10d\n",k*F_res,fft_out[k],fft_in[k]);
 			}
 #endif
 			printf("\n\n");

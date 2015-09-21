@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "../include/cordic.h"
+#include "cordic.h"
 
 double atan_values[32] = {0};
 double scale_factor_values[32] = {1};
