@@ -38,8 +38,17 @@ Commit Number:11
 Commit Number:12
 	-Added generation of double type lookup table for scale factor and atan values
 
-Commit Number:12
+Commit Number:13
 	-Added ifft
 	-Added seperate compilation for generating just a sine wave
 	-Added assembly code generation
+
+Commit Number:14
 	-Updated readme
+
+Commit Number:15
+	-Bug in sine wave fixed, first value in buffer getting overwritten
+	-Fixed Makefile output names
+
+Commit Number:16
+	-Fixed Commit notes
