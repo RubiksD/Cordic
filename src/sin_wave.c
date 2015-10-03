@@ -10,7 +10,7 @@ int main()
 {
 	int X_in,Y_in;
 
-	int fft_in[N_POINT];
+	int sin_wave[N_POINT];
 	
 	int word_mag;
 	int word_sign;
@@ -19,8 +19,21 @@ int main()
 #ifdef MEASURE_TIME
 	struct timeval tv1,tv2;
 #endif
+	
+	int f_sample;
+	int f_out;
+	int arguments_recieved=0;
 
-	calculate_rotation_angle(F_SAMPLE,F_OUT,&word_mag,&word_sign,&scale);
+	while(!arguments_recieved){
+		printf("Enter sampling frequency:");
+		while(!(scanf("%d",&f_sample)));
+		printf("Enter sine wave frequency:");
+		while(!(scanf("%d",&f_out)));
+		if(f_sample > 4*f_out){
+			arguments_recieved = 1;
+		}
+	}
+	calculate_rotation_angle(f_sample,f_out,&word_mag,&word_sign,&scale);
 	printf("Rotation Magnitude = 0x%x\nRotation sign = 0x%x\nScale factor = %lf\n",word_mag,word_sign,scale);
 	
 	X_in = 0x8000;
@@ -29,13 +42,12 @@ int main()
 	
 	for(j=0;j<9999;j++){
 		cordic_rotate(word_mag,word_sign,scale,&X_in,&Y_in);
-		fft_in[j&(N_POINT-1)]= X_in;
+		sin_wave[j&(N_POINT-1)]= X_in;
 #ifdef DISPLAY_OUTPUT
-		if(((j%N_POINT) == 0) && (j>0)){
+		if(((j%N_POINT) == (N_POINT-1)) && (j>0)){
 			for(k=0;k<N_POINT;k++){
-				printf("%d\n",fft_in[k]);
+				printf("%d\t%d\n",j,sin_wave[k]);
 			}
-			printf("\n");
 		}
 #endif
 	}

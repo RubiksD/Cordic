@@ -38,7 +38,7 @@ int main()
 	for(j=0;j<9999;j++){
 		cordic_rotate(word_mag,word_sign,scale,&X_in,&Y_in);
 		fft_in[j&(N_POINT-1)]= X_in;
-		if(((j%N_POINT) == 0) && (j>0)){
+		if(((j%(N_POINT-1)) == 0) && (j>0)){
 			printf("\n");
 #ifdef MEASURE_TIME
 			gettimeofday(&tv1,NULL);

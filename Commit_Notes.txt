@@ -42,3 +42,4 @@ Commit Number:12
 	-Added ifft
 	-Added seperate compilation for generating just a sine wave
 	-Added assembly code generation
+	-Updated readme

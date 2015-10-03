@@ -4,8 +4,8 @@ OD = objdump
 SRC_PATH = ../src
 PRE_COMPILATION_FLAGS = -Wall -O3 -g
 POST_COMPILATION_FLAGS = -lm
-OUTPUT1 = cordic_rotate.out
-OUTPUT2 = cordic_sin_wave.out
+OUTPUT1 = cordic_rotate
+OUTPUT2 = cordic_sin_wave
 INCLUDE = -I ../include
 
 SRC_COMMON = 	$(SRC_PATH)/fft.c\
@@ -20,12 +20,12 @@ SRC2	=	$(SRC_PATH)/sin_wave.c\
 FLAGS += -DDISPLAY_OUTPUT
 
 rotate:	clean
-	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC1) $(FLAGS) -o $(OUTPUT1) $(POST_COMPILATION_FLAGS)
-	$(OD) -S $(OUTPUT1) > $(OUTPUT1).asm
+	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC1) $(FLAGS) -o $(OUTPUT1).out $(POST_COMPILATION_FLAGS)
+	$(OD) -S $(OUTPUT1).out > $(OUTPUT1).asm
 
 sin_wave:	clean
-	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC2) $(FLAGS) -o $(OUTPUT2) $(POST_COMPILATION_FLAGS)
-	$(OD) -S $(OUTPUT2) > $(OUTPUT2).asm
+	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC2) $(FLAGS) -o $(OUTPUT2).out $(POST_COMPILATION_FLAGS)
+	$(OD) -S $(OUTPUT2).out > $(OUTPUT2).asm
 
 clean:
 	rm -f *.out
