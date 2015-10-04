@@ -62,3 +62,6 @@ Commit Number:18
 
 Commit Number:19
 	-Fixed compilation error inserted in Rev.18
+
+Commit Number:20
+	-Added map file creation

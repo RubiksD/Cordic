@@ -80,8 +80,13 @@ void ifft_Npt(int *inputX, int *inputY, int *X_out, int *Y_out,int N)
 	int i,j,k;
 	int offset=0;
 	int Set_Count=1;
-	double theta = 2*pi/N;
+#ifdef DOUBLE_CALCULATIONS
+	double theta = convert_to_cordic_weight(2*pi/N);
 	double Set_theta,Butterfly_theta;
+#else
+	int theta = convert_to_cordic_weight(2*pi/N);
+	int Set_theta,Butterfly_theta;
+#endif
 	int X_in[1024],Y_in[1024];
 	int X_temp[3],Y_temp[3];
 	for(i=0;i<N;i++){
