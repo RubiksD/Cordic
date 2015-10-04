@@ -1,5 +1,6 @@
 CC = gcc
 OD = objdump
+LD = ld
 
 SRC_PATH = ../src
 PRE_COMPILATION_FLAGS = -Wall -O3 -g

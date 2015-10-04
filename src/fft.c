@@ -103,7 +103,11 @@ void ifft_Npt(int *inputX, int *inputY, int *X_out, int *Y_out,int N)
 
 				//X_temp[2] = (X_temp[1]*cos(Butterfly_theta)) + (Y_temp[1]*sin(Butterfly_theta));
 				//Y_temp[2] = (-(X_temp[1]*sin(Butterfly_theta))) + (Y_temp[1]*cos(Butterfly_theta));
-				cordic_rotate_2(&X_temp[1],&Y_temp[1],Butterfly_theta);
+#ifdef DOUBLE_CALCULATIONS
+				cordic_rotate_double(&X_temp[1],&Y_temp[1],-Butterfly_theta);
+#else
+				cordic_rotate_int(&X_temp[1],&Y_temp[1],-Butterfly_theta);
+#endif
 				X_temp[2] = X_temp[1];
 				Y_temp[2] = Y_temp[1];
 
