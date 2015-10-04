@@ -18,7 +18,7 @@ int main()
 	int fft_in[N_POINT];
 	int fft_out[N_POINT];
 	int ifft_out[N_POINT];
-	
+
 	int word_mag;
 	int word_sign;
 	int j,k;
@@ -30,11 +30,11 @@ int main()
 	create_lookup_table();
 	calculate_rotation_angle(F_SAMPLE,F_OUT,&word_mag,&word_sign,&scale);
 	printf("Rotation Magnitude = 0x%x\nRotation sign = 0x%x\nScale factor = %lf\n",word_mag,word_sign,scale);
-	
+
 	X_in = 0x8000;
 	printf("Amplitude = %d\n",X_in);
 	Y_in = 0;
-	
+
 	for(j=0;j<9999;j++){
 		cordic_rotate(word_mag,word_sign,scale,&X_in,&Y_in);
 		fft_in[j&(N_POINT-1)]= X_in;
@@ -48,8 +48,7 @@ int main()
 			for(k=0;k<N_POINT;k=k+2){
 				fft_out[k] = cordic_vector(fft_outX[k],fft_outY[k]);
 				fft_out[k+1] = cordic_vector(fft_outX[k+1],fft_outY[k+1]);
-				//ifft_out[k] = cordic_vector(ifft_outX[k],ifft_outY[k]);
-				//ifft_out[k+1] = cordic_vector(ifft_outX[k+1],ifft_outY[k+1]);
+
 				ifft_out[k] = ifft_outX[k];
 				ifft_out[k+1] = ifft_outX[k+1];
 			}

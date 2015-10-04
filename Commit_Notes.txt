@@ -54,4 +54,8 @@ Commit Number:16
 	-Fixed Commit notes
 
 Commit Number:17
-	-Updated Readme
+	-Updated Read-me
+
+Commit Number:18
+	-Added full integer support for Rotation
+	-Added define DOUBLE_CALCULATIONS for supporting double type operations

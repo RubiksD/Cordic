@@ -4,7 +4,7 @@ OD = objdump
 SRC_PATH = ../src
 PRE_COMPILATION_FLAGS = -Wall -O3 -g
 POST_COMPILATION_FLAGS = -lm
-OUTPUT1 = cordic_rotate
+OUTPUT1 = cordic_fft
 OUTPUT2 = cordic_sin_wave
 INCLUDE = -I ../include
 
@@ -18,8 +18,9 @@ SRC2	=	$(SRC_PATH)/sin_wave.c\
 
 #FLAGS += -DMEASURE_TIME
 FLAGS += -DDISPLAY_OUTPUT
+#FLAGS += -DDOUBLE_CALCULATIONS
 
-rotate:	clean
+fft:	clean
 	$(CC) $(PRE_COMPILATION_FLAGS) $(INCLUDE) $(SRC1) $(FLAGS) -o $(OUTPUT1).out $(POST_COMPILATION_FLAGS)
 	$(OD) -S $(OUTPUT1).out > $(OUTPUT1).asm
 

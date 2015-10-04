@@ -6,13 +6,12 @@ The cordic algorithm is used for calculating various functions such as trigonome
 This implementation in C is for calculating some of these with fixed point arithmetics.
 The following are aimed to be created
 1. Trigonometric functions
-2. Fast fourier and inverse fast fourier transforms
---More to come
+2. Fast Fourier and inverse fast Fourier transforms
 
 #Limitations
-Currently supports only two powered number of points for fft
-Doesn't support decimation in time
-Sine wave only with sampling greater than nyquist rate
+1. Currently supports only two powered number of points for fft
+2. Doesn't support decimation in time
+3. Sine wave only with sampling greater than nyquist rate
 
 #TODO
 1. Full integer calculations
