@@ -65,3 +65,6 @@ Commit Number:19
 
 Commit Number:20
 	-Added map file creation
+
+Commit Number:21
+	-Creating a better map using nm
