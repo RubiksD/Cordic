@@ -68,3 +68,6 @@ Commit Number:20
 
 Commit Number:21
 	-Creating a better map using nm
+
+Commit Number:22
+	-Combining code necessary for fft into a library

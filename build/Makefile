@@ -2,6 +2,10 @@ CC = gcc
 OD = objdump
 LD = ld
 NM = nm
+AR = ar
+RANLIB = ranlib
+
+AR_FLAGS = rc
 
 SRC_PATH = ../src
 PRE_COMPILATION_FLAGS = -Wall -O3 -g
@@ -33,7 +37,15 @@ sin_wave:	clean
 	$(NM) -n $(OUTPUT2).out > $(OUTPUT2).map
 	$(OD) -S $(OUTPUT2).out > $(OUTPUT2).asm
 
+library:	clean
+	$(CC) $(SRC_COMMON) -c $(FLAGS)
+	$(AR) $(AR_FLAGS) cordic_fft.a *.o
+	$(RANLIB) cordic_fft.a
+	cp -f cordic_fft.a ../lib
+
 clean:
 	rm -f *.map
 	rm -f *.out
 	rm -f *.asm
+	rm -f *.a
+	rm -f *.o
