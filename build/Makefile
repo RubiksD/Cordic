@@ -40,8 +40,8 @@ sin_wave:	clean
 library:	clean
 	$(CC) $(SRC_COMMON) -c $(FLAGS)
 	$(AR) $(AR_FLAGS) cordic_fft.a *.o
-	$(RANLIB) cordic_fft.a
-	cp -f cordic_fft.a ../lib
+	$(RANLIB) libcordic_fft.a
+	cp -f libcordic_fft.a ../lib
 
 clean:
 	rm -f *.map
