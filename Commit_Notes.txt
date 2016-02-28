@@ -74,3 +74,6 @@ Commit Number:22
 
 Commit Number:23
 	-Renaming library to libcordic_fft.a
+
+Commit Number:24
+	-Makefile update

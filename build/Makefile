@@ -39,7 +39,7 @@ sin_wave:	clean
 
 library:	clean
 	$(CC) $(SRC_COMMON) -c $(FLAGS)
-	$(AR) $(AR_FLAGS) cordic_fft.a *.o
+	$(AR) $(AR_FLAGS) libcordic_fft.a *.o
 	$(RANLIB) libcordic_fft.a
 	cp -f libcordic_fft.a ../lib
 
