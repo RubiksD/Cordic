@@ -5,17 +5,44 @@
 double atan_values[30] = {0};
 int atan_values_d[30] = {0};
 double scale_factor_values[30] = {1};
-
+int table_created;
 inline int convert_to_cordic_weight(double in)
 {
 	int out = (in/atan(1))*(0x20000000);
 	return out;
 }
+void create_silent_lookup_table()
+{
+	double tan_val = 1;
+	double scale = 1;
+	int i=0;
+	table_created = 1;
+	for(i=0;i<30;i++){
+		atan_values[i] = atan(tan_val);
+		atan_values_d[i] = convert_to_cordic_weight(atan_values[i]);
+		scale *= 1.0/sqrt(1+(tan_val*tan_val));
+		scale_factor_values[i] = scale;
+		tan_val = tan_val/2;
+	}
+	int temp,j;
+	for(i=0;i<30;i++){
+		temp = atan_values_d[i];
+		for(j=i+1;j<30;j++){
+			if(temp >= 0){
+				temp -= atan_values_d[j];
+			}else{
+				temp += atan_values_d[j];
+			}
+		}
+	}
+}
+
 void create_lookup_table()
 {
 	double tan_val = 1;
 	double scale = 1;
 	int i=0;
+	table_created = 1;
 	for(i=0;i<30;i++){
 		atan_values[i] = atan(tan_val);
 		atan_values_d[i] = convert_to_cordic_weight(atan_values[i]);
@@ -140,6 +167,9 @@ void cordic_rotate_int(int *X_in,int *Y_in,int angle)
 	int change_sign =0;
 	int error=angle;
 	double scale;
+	if(!table_created){
+		create_silent_lookup_table();
+	}
 	if( (error & 0xC0000000) == BIT(30) ){
 		change_sign = 1;
 		error += (1<<31);
