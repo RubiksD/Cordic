@@ -1,0 +1,2 @@
+iverilog -o mem_tb.vvp ../tb/memory_wrapper_tb.v ../core/memory_wrapper.v
+vvp mem_tb.vvp

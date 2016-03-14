@@ -83,3 +83,6 @@ Commit Number:25
 
 Commit Number:26
 	-Added a file containing hex form of weights
+
+Commit Number:27
+	-Initial commit for verilog folder

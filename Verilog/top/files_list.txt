@@ -1,0 +1,2 @@
+../core/cordic_core.v
+../core/memory_wrapper.v
