@@ -80,3 +80,6 @@ Commit Number:24
 
 Commit Number:25
 	-Added creating lookup table if not already created
+
+Commit Number:26
+	-Added a file containing hex form of weights
